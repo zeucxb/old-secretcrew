@@ -2,6 +2,9 @@ package main
 
 import (
 	"net/http"
+	"os"
+
+	"fmt"
 
 	"github.com/graphql-go/graphql"
 	gqlhandler "github.com/graphql-go/graphql-go-handler"
@@ -24,6 +27,12 @@ var Schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 })
 
 func main() {
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "8000"
+	}
+
 	// create a graphql-go HTTP handler with our previously defined schema
 	// and we also set it to return pretty JSON output
 	h := gqlhandler.New(&gqlhandler.Config{
@@ -39,6 +48,8 @@ func main() {
 
 	http.Handle("/", fs)
 
+	fmt.Println(port)
+
 	// and serve!
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServe(":"+port, nil)
 }
