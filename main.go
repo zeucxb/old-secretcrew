@@ -4,8 +4,6 @@ import (
 	"net/http"
 	"os"
 
-	"fmt"
-
 	"github.com/graphql-go/graphql"
 	gqlhandler "github.com/graphql-go/graphql-go-handler"
 )
@@ -47,8 +45,6 @@ func main() {
 	http.Handle("/graphql", h)
 
 	http.Handle("/", fs)
-
-	fmt.Println(port)
 
 	// and serve!
 	http.ListenAndServe(":"+port, nil)
