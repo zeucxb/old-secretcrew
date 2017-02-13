@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -8,20 +9,50 @@ import (
 	gqlhandler "github.com/graphql-go/graphql-go-handler"
 )
 
+var postList []string
+
 var queryType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Query",
 	Fields: graphql.Fields{
 		"latestPost": &graphql.Field{
 			Type: graphql.String,
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				return "Hello World!", nil
+			Resolve: func(_ graphql.ResolveParams) (interface{}, error) {
+				if len(postList) == 0 {
+					return "", fmt.Errorf("NO POST YET")
+				}
+				return postList[0], nil
+			},
+		},
+	},
+})
+
+var mutationType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Mutation",
+	Fields: graphql.Fields{
+		"createPost": &graphql.Field{
+			Type: graphql.String,
+			Args: graphql.FieldConfigArgument{
+				"post": &graphql.ArgumentConfig{
+					Type: graphql.NewNonNull(graphql.String),
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				newPost, ok := params.Args["post"].(string)
+				if !ok {
+					return newPost, fmt.Errorf("SYSTEM ERROR")
+				}
+
+				postList = append([]string{newPost}, postList...)
+
+				return newPost, nil
 			},
 		},
 	},
 })
 
 var Schema, _ = graphql.NewSchema(graphql.SchemaConfig{
-	Query: queryType,
+	Query:    queryType,
+	Mutation: mutationType,
 })
 
 func main() {
