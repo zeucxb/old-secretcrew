@@ -3,16 +3,15 @@ package main
 import (
 	"net/http"
 	"os"
-	"secret-crew/mutations"
-	"secret-crew/queries"
+	"secret-crew/modules"
 
 	"github.com/graphql-go/graphql"
 	gqlhandler "github.com/graphql-go/graphql-go-handler"
 )
 
 var Schema, _ = graphql.NewSchema(graphql.SchemaConfig{
-	Query:    queries.QueryType,
-	Mutation: mutations.MutationType,
+	Query:    modules.QueryType,
+	Mutation: modules.MutationType,
 })
 
 func main() {
