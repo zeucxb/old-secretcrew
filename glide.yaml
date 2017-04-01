@@ -1,4 +1,4 @@
-package: secret-crew
+package: secretcrew
 import:
 - package: github.com/graphql-go/graphql
   version: ^0.6.0
