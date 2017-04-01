@@ -6,7 +6,8 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var CreatePostField = &graphql.Field{
+// CreatePostType is the graphql type to create post
+var CreatePostType = &graphql.Field{
 	Type: graphql.String,
 	Args: graphql.FieldConfigArgument{
 		"post": &graphql.ArgumentConfig{

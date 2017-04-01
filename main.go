@@ -9,7 +9,7 @@ import (
 	gqlhandler "github.com/graphql-go/graphql-go-handler"
 )
 
-var Schema, _ = graphql.NewSchema(graphql.SchemaConfig{
+var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 	Query:    modules.QueryType,
 	Mutation: modules.MutationType,
 })
@@ -24,7 +24,7 @@ func main() {
 	// create a graphql-go HTTP handler with our previously defined schema
 	// and we also set it to return pretty JSON output
 	h := gqlhandler.New(&gqlhandler.Config{
-		Schema: &Schema,
+		Schema: &schema,
 		Pretty: true,
 	})
 

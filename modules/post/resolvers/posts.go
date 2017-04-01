@@ -8,6 +8,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
+// PostsResolver is the resolver of PostsType
 var PostsResolver = func(p graphql.ResolveParams) (interface{}, error) {
 	if len(helpers.PostList) == 0 {
 		return "", fmt.Errorf("NO POST YET")
