@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 	"os"
-	"secret-crew/modules"
+	"secretcrew/modules"
 
 	"github.com/graphql-go/graphql"
 	gqlhandler "github.com/graphql-go/graphql-go-handler"

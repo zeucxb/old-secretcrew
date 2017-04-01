@@ -1,7 +1,7 @@
-package fields
+package types
 
 import (
-	"secret-crew/modules/post/resolvers"
+	"secretcrew/modules/post/resolvers"
 
 	"github.com/graphql-go/graphql"
 )

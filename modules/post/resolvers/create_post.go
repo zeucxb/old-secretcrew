@@ -2,7 +2,7 @@ package resolvers
 
 import (
 	"fmt"
-	"secret-crew/helpers"
+	"secretcrew/helpers"
 
 	"github.com/graphql-go/graphql"
 )
