@@ -15,8 +15,12 @@ var PostsResolver = func(p graphql.ResolveParams) (interface{}, error) {
 
 	if _id := p.Args["_id"]; _id != nil {
 		id, err := strconv.Atoi(_id.(string))
-		if err != nil {
+		if err != nil || id < 0 {
 			return helpers.PostList, fmt.Errorf("INVALID ARGUMENT (_id)")
+		}
+
+		if len(helpers.PostList)-1 < id {
+			return helpers.PostList, fmt.Errorf("POST NOT FOUND")
 		}
 
 		return []string{helpers.PostList[id]}, nil
