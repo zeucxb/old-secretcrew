@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"os"
+	"secretcrew/helpers/database"
 	"secretcrew/modules"
 
 	"github.com/graphql-go/graphql"
@@ -14,9 +15,12 @@ var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 	Mutation: modules.MutationType,
 })
 
+func init() {
+	database.SetDB("secretcrew")
+}
+
 func main() {
 	port := os.Getenv("PORT")
-
 	if port == "" {
 		port = "8000"
 	}

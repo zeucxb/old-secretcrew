@@ -3,6 +3,8 @@ package types
 import (
 	"secretcrew/modules/post/types"
 
+	"gopkg.in/mgo.v2/bson"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -34,7 +36,7 @@ var UserInputType = graphql.NewInputObject(graphql.InputObjectConfig{
 
 // User is the user type
 type User struct {
-	ID    string     `json:"_id"`
-	Name  string     `json:"name"`
-	Posts types.Post `json:"posts"`
+	ID    bson.ObjectId `json:"_id" bson:"_id"`
+	Name  string        `json:"name" bson:"name"`
+	Posts types.Post    `json:"posts" bson:"posts"`
 }

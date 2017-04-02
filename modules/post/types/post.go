@@ -1,6 +1,9 @@
 package types
 
-import "github.com/graphql-go/graphql"
+import (
+	"github.com/graphql-go/graphql"
+	"gopkg.in/mgo.v2/bson"
+)
 
 // PostType is the graphql post type
 var PostType = graphql.NewObject(graphql.ObjectConfig{
@@ -27,6 +30,7 @@ var PostInputType = graphql.NewInputObject(graphql.InputObjectConfig{
 
 // Post is the post type
 type Post struct {
-	ID      string `json:"_id"`
-	Message string `json:"message"`
+	ID      bson.ObjectId `json:"_id" bson:"_id"`
+	Message string        `json:"message" bson:"message"`
+	UserID  bson.ObjectId `json:"userId" bson:"userId"`
 }
