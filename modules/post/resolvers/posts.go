@@ -3,6 +3,7 @@ package resolvers
 import (
 	"fmt"
 	"secretcrew/helpers"
+	"secretcrew/modules/post/types"
 	"strconv"
 
 	"github.com/graphql-go/graphql"
@@ -24,7 +25,7 @@ var PostsResolver = func(p graphql.ResolveParams) (interface{}, error) {
 			return helpers.PostList, fmt.Errorf("POST NOT FOUND")
 		}
 
-		return []string{helpers.PostList[id]}, nil
+		return []types.Post{helpers.PostList[id]}, nil
 	}
 	return helpers.PostList, nil
 }

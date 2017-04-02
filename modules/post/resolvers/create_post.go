@@ -3,18 +3,21 @@ package resolvers
 import (
 	"fmt"
 	"secretcrew/helpers"
+	"secretcrew/modules/post/types"
 
 	"github.com/graphql-go/graphql"
 )
 
 // CreatePostResolver is the resolver of the CreatePostType
 var CreatePostResolver = func(params graphql.ResolveParams) (interface{}, error) {
-	newPost, ok := params.Args["post"].(string)
+	newPost, ok := params.Args["post"].(map[string]interface{})
 	if !ok {
 		return newPost, fmt.Errorf("SYSTEM ERROR")
 	}
 
-	helpers.PostList = append([]string{newPost}, helpers.PostList...)
+	post := types.Post{Message: newPost["message"].(string)}
 
-	return newPost, nil
+	helpers.PostList = append([]types.Post{post}, helpers.PostList...)
+
+	return post, nil
 }

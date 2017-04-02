@@ -1,7 +1,8 @@
 package modules
 
 import (
-	"secretcrew/modules/post/types"
+	post "secretcrew/modules/post/fields"
+	user "secretcrew/modules/user/fields"
 
 	"github.com/graphql-go/graphql"
 )
@@ -10,6 +11,7 @@ import (
 var QueryType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Query",
 	Fields: graphql.Fields{
-		"posts": types.PostsType,
+		"posts": post.PostsType,
+		"users": user.UsersType,
 	},
 })
