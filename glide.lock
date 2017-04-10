@@ -1,6 +1,8 @@
-hash: 8025744870304bad9f536e2cbb8b182934dc84041839cce0e7c04779fbb169c9
-updated: 2017-02-14T02:23:50.020366836-02:00
+hash: 46483f8fc648d3d4ae2f868b411ca90a3ad983ec3ec6e856b0200f239c680fd4
+updated: 2017-04-09T20:18:19.621211538-03:00
 imports:
+- name: github.com/dgrijalva/jwt-go
+  version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
 - name: github.com/graphql-go/graphql
   version: e13376c2344b5694a62b7cf6cd8b543c813cd5ee
   subpackages:
@@ -15,11 +17,18 @@ imports:
   - language/typeInfo
   - language/visitor
 - name: github.com/graphql-go/graphql-go-handler
-  version: 52e6de4fccd785952dce42265f316acd43a3053f
+  version: 07e3dd439c1f4ec14e685af7c48e8863bcc42c9d
+- name: github.com/Sirupsen/logrus
+  version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
 - name: golang.org/x/net
-  version: 61557ac0112b576429a0df080e1c2cef5dfbb642
+  version: 6b27048ae5e6ad1ef927e72e437531493de612fe
   subpackages:
   - context
 - name: gopkg.in/mgo.v2
   version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+  - internal/json
+  - internal/sasl
+  - internal/scram
 testImports: []

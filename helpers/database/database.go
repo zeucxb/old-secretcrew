@@ -3,6 +3,7 @@ package database
 import (
 	"os"
 
+	log "github.com/Sirupsen/logrus"
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -35,6 +36,12 @@ func SetDB(dbName string) {
 }
 
 // Collection return a mongodb collection
-func Collection(collectionName string) *mgo.Collection {
-	return getSession().DB(databaseName).C(collectionName)
+func Collection(collectionName string, index mgo.Index) (c *mgo.Collection) {
+	c = getSession().DB(databaseName).C(collectionName)
+
+	if err := c.EnsureIndex(index); err != nil {
+		log.Warn(err)
+	}
+
+	return
 }

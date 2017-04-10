@@ -9,7 +9,7 @@ import (
 
 // CreateUserType is the graphql type to create post
 var CreateUserType = &graphql.Field{
-	Type: types.UserType,
+	Type: types.CreatedUser,
 	Args: graphql.FieldConfigArgument{
 		"user": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(types.UserInputType),
