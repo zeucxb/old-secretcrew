@@ -37,8 +37,6 @@ var UsersResolver = func(p graphql.ResolveParams) (interface{}, error) {
 		return nil, fmt.Errorf("SYSTEM ERROR")
 	}
 
-	fmt.Println(query)
-
 	if len(users) == 0 {
 		return nil, errMessage
 	}
