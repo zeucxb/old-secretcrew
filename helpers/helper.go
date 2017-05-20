@@ -1,12 +1,20 @@
 package helpers
 
 import (
+	"os"
 	post "secretcrew/modules/post/types"
-	user "secretcrew/modules/user/types"
 )
 
 // PostList is a mock list of posts
 var PostList []post.Post
 
-// UserList is a mock list of users
-var UserList []user.User
+// GetENVorDefault returns the env value or the default
+func GetENVorDefault(env string, dft string) (strcon string) {
+	strcon = dft
+
+	if envStr := os.Getenv(env); envStr != "" {
+		strcon = envStr
+	}
+
+	return
+}
