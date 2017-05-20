@@ -8,26 +8,38 @@ import (
 )
 
 var databaseName string
+var Session *mgo.Session
 
-func getSession() *mgo.Session {
-	strcon := "mongodb://localhost"
+func StartDB() *mgo.Session {
+	strcon := getStrCon()
+
+	var err error
+
+	Session, err = mgo.Dial(strcon)
+	if err != nil {
+		panic(err)
+	}
+
+	return Session
+}
+
+func CloseDB() {
+	Session.Close()
+}
+
+func getStrCon() (strcon string) {
+	strcon = "mongodb://localhost"
 
 	if mongoURI := os.Getenv("MONGODB_URI"); mongoURI != "" {
 		strcon = mongoURI
 	}
 
-	// Connect to our mongodb
-	s, err := mgo.Dial(strcon)
-	if err != nil {
-		panic(err)
-	}
-
-	return s
+	return
 }
 
 // DB return a mongodb database connection
 func DB(dbName string) {
-	getSession().DB(databaseName)
+	Session.DB(dbName)
 }
 
 // SetDB set a mongodb database
@@ -37,7 +49,7 @@ func SetDB(dbName string) {
 
 // Collection return a mongodb collection
 func Collection(collectionName string, index mgo.Index) (c *mgo.Collection) {
-	c = getSession().DB(databaseName).C(collectionName)
+	c = Session.DB(databaseName).C(collectionName)
 
 	if err := c.EnsureIndex(index); err != nil {
 		log.Warn(err)

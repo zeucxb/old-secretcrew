@@ -13,7 +13,6 @@ import (
 
 // UsersResolver is the resolver of UsersType
 var UsersResolver = func(p graphql.ResolveParams) (interface{}, error) {
-
 	query := bson.M{}
 
 	errMessage := fmt.Errorf("NO USERS YET")

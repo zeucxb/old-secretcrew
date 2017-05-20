@@ -25,6 +25,9 @@ func main() {
 		port = "8000"
 	}
 
+	database.StartDB()
+	defer database.CloseDB()
+
 	// create a graphql-go HTTP handler with our previously defined schema
 	// and we also set it to return pretty JSON output
 	h := gqlhandler.New(&gqlhandler.Config{
