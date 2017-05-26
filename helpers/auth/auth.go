@@ -31,7 +31,7 @@ func GetTokenInfos(tokenString string) (userToken userTK, err error) {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
 
-		return []byte("segrego"), nil
+		return getSecret(), nil
 	})
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
