@@ -16,7 +16,7 @@ var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 })
 
 func main() {
-	helpers.GetENVorDefault("PORT", "8000")
+	port := helpers.GetENVorDefault("PORT", "8000")
 
 	database.StartDB()
 	defer database.CloseDB()
