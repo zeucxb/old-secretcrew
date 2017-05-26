@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"os"
+	"secretcrew/helpers"
 	"secretcrew/helpers/database"
 	"secretcrew/modules"
 
@@ -16,10 +16,7 @@ var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 })
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8000"
-	}
+	helpers.GetENVorDefault("PORT", "8000")
 
 	database.StartDB()
 	defer database.CloseDB()
