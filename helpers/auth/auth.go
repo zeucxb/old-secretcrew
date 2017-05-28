@@ -25,7 +25,7 @@ func CreateToken(user types.User) (tokenString string, err error) {
 }
 
 // GetTokenInfos receive a token string and returns a userTK
-func GetTokenInfos(tokenString string) (userToken userTK, err error) {
+func GetTokenInfos(tokenString string) (userToken UserTK, err error) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
@@ -38,7 +38,7 @@ func GetTokenInfos(tokenString string) (userToken userTK, err error) {
 		userID := claims["_id"].(string)
 		createdAt := claims["createdAt"].(time.Time)
 
-		userToken = userTK{
+		userToken = UserTK{
 			UserID:    userID,
 			CreatedAt: createdAt,
 		}
@@ -57,7 +57,8 @@ func getSecret() (secret []byte) {
 	return
 }
 
-type userTK struct {
+// UserTK is the user token type
+type UserTK struct {
 	UserID    string
 	CreatedAt time.Time
 }
